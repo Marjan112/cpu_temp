@@ -21,4 +21,4 @@ You'll need C++23 for this.
 $ make
 ```
 
-Now you can create a user daemon that starts this fuckass govno up or you can make it run whenever you login or smth.
+Now you can create a user daemon that starts this up or you can make it run whenever you login or smth.
