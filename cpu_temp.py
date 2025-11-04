@@ -14,7 +14,7 @@ def find_tctl_temp():
 
     return None
 
-def write_temp_to_file(tctl_temp: float, path: str):
+def write_temp_to_file(tctl_temp, path):
     file = open(path, "w")
     file.write(f"{tctl_temp}")
     file.close()
