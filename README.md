@@ -8,7 +8,7 @@ I created this because i3status doesn't know which temperature is my cpu tempera
 cpu_temperature 0 {
     # instead of just manually searching for the tctl temperature file
     # and pasting it's path in the `path` variable i can just do this:
-    path = "~/.cpu_temp"
+    path = "/run/cpu_temp"
 }
 ...
 ```
