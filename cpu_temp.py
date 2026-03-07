@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
 import psutil
-import os
 import time
+import logging
+
+logging.basicConfig(filename="cpu_temp.log", level=logging.DEBUG, format="[%(asctime)s - %(levelname)s] %(message)s")
 
 def find_tctl_temp():
     temps = psutil.sensors_temperatures()
@@ -15,16 +17,17 @@ def find_tctl_temp():
     return None
 
 def write_temp_to_file(tctl_temp, path):
-    file = open(path, "w")
-    file.write(f"{tctl_temp}")
-    file.close()
-
-home = os.environ["HOME"]
+    try:
+        with open(path, "w") as f:
+            f.write(f"{tctl_temp}")
+    except Exception as e:
+        logging.error(f"Couldnt write to {path}: {e}")
 
 while True:
     tctl_temp = find_tctl_temp()
     if tctl_temp is None:
+        logging.error("Couldnt find cpu temp")
         exit(1)
 
-    write_temp_to_file(tctl_temp, f"{home}/.cpu_temp")
+    write_temp_to_file(tctl_temp, "/run/cpu_temp")
     time.sleep(1)
