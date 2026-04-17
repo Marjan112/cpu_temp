@@ -1,7 +1,7 @@
 # cpu_temp
 
-Simple program that gets the tctl temperature and then saves it to ~/.cpu_temp.
-I created this because i3status doesn't know which temperature is my cpu temperature, so it just ends up picking the first one, that's why i created this program that searches for tctl sensor and writes the value to ~/.cpu_temp. That way i can just do this:
+Simple program that gets the tctl temperature and then saves it to ~~&tilde;/.cpu_temp~~ /run/cpu_temp.
+I created this because i3status doesn't know which temperature is my cpu temperature, so it just ends up picking the first one, that's why i created this program that searches for tctl sensor and writes the value to ~~&tilde;/.cpu_temp~~ /run/cpu_temp. That way i can just do this:
 
 ```config
 ...
