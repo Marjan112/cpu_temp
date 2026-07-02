@@ -23,38 +23,34 @@ int main() {
         char label[16];
         fread(label, sizeof(label), 1, label_file);
 
-        char *tok = strtok(label, " ");
-        while(tok != NULL) {
-            if(strcmp(tok, "Package") == 0 || strcmp(tok, "Tctl") == 0) {
-                char *parent = dirname(label_path);                
-                int n;
-                sscanf(label_base, "%*[^0-9]%d", &n); 
-                
-                char input_path[128];
-                snprintf(input_path, sizeof(input_path), "%s/temp%d_input", parent, n);
+        if(strstr(label, "Package") || strstr(label, "Tctl")) {
+            char *parent = dirname(label_path);                
+            int n;
+            sscanf(label_base, "%*[^0-9]%d", &n); 
+            
+            char input_path[128];
+            snprintf(input_path, sizeof(input_path), "%s/temp%d_input", parent, n);
 
-                FILE *input_file = fopen(input_path, "r");
+            FILE *input_file = fopen(input_path, "r");
 
-                int millideg;
-                fscanf(input_file, "%d", &millideg);
+            int millideg;
+            fscanf(input_file, "%d", &millideg);
 
-                float deg = (float)millideg / 1000;
+            float deg = (float)millideg / 1000;
 
-                const char *color;
+            const char *color;
 
-                if(deg >= 80) color = "#ff0000";
-                else if(deg >= 50) color = "#ffd11a";
-                else color = "#478061";
+            if(deg >= 80) color = "#ff0000";
+            else if(deg >= 50) color = "#ffd11a";
+            else color = "#478061";
 
-                printf("<span foreground='%s'>CPU temp: %.1f°C</span>\n", color, deg);
+            printf("<span foreground='%s'>CPU temp: %.1f°C</span>\n", color, deg);
 
-                free(label_path_copy);
-                fclose(input_file);
-                fclose(label_file);
-                globfree(&label_matches);
-                return 0;
-            }
-            tok = strtok(NULL, " ");
+            free(label_path_copy);
+            fclose(input_file);
+            fclose(label_file);
+            globfree(&label_matches);
+            return 0;
         }
 
         free(label_path_copy);
